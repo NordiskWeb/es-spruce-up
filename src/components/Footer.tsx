@@ -1,4 +1,5 @@
 import { Phone, Mail, MapPin } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const Footer = () => {
   return (
@@ -7,10 +8,8 @@ const Footer = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <span className="text-gradient-gold text-2xl font-bold tracking-wide font-serif">
-              ES BYGGSERVICE AB
-            </span>
-            <p className="text-muted-foreground mt-4 max-w-md leading-relaxed">
+            <img src={logo} alt="ES Byggservice AB" className="h-10 w-auto mb-4" />
+            <p className="text-muted-foreground max-w-md leading-relaxed">
               Vi är specialister på alla typer av byggprojekt – från nybyggnation och 
               renovering till försäkringsskador. Kvalitet och nöjd kund är vår prioritet.
             </p>
