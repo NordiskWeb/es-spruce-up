@@ -1,36 +1,31 @@
 import { motion } from "framer-motion";
-import { Home, Hammer, ShieldCheck, Paintbrush, Bath, Building2 } from "lucide-react";
+import { Building2, Layers, Bath, SquareStack, ShieldCheck } from "lucide-react";
 
 const services = [
   {
-    icon: Home,
-    title: "Nybyggnation",
-    description: "Vi bygger ditt drömhem från grunden med högsta kvalitet och precision.",
+    icon: Building2,
+    title: "Takarbeten",
+    description: "Att ha ett bra tak över huvudet är avgörande. Med omsorg och noggrant utvalt material hanterar vi din takläggning och takservice, så att ditt tak blir det bästa det kan vara. Kontakta oss för planering av just ditt tak.",
   },
   {
-    icon: Hammer,
-    title: "Renovering",
-    description: "Komplett renovering av villor, lägenheter och kommersiella lokaler.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Försäkringsskador",
-    description: "Expert på försäkringsarbeten med snabb och professionell hantering.",
+    icon: Layers,
+    title: "Golvläggning & Specialprojekt",
+    description: "Ett nytt golv är den mest grundliga uppgraderingen man kan unna sig. Vi har skickliga hantverkare som kostnadseffektivt anpassar golv efter olika planlösningar och husmodeller.",
   },
   {
     icon: Bath,
-    title: "Badrumsrenovering",
-    description: "Moderna badrum med certifierade plattsättare och rörmokare.",
+    title: "Badrum",
+    description: "Ett rent och välorganiserat badrum är A och O. Från kakel och inredning till våtrumssystem – VVS-arbeten kräver precision och finess. Kontakta oss för badrumsrenoveringar och nybyggen.",
   },
   {
-    icon: Paintbrush,
-    title: "Måleri",
-    description: "Invändig och utvändig målning med kvalitetsprodukter.",
+    icon: SquareStack,
+    title: "Fönster",
+    description: "Söker du fönsterbyten? Lämna jobbet i säkra händer hos oss. Välj från vårt utbud och se till att din vy blir exakt som du vill ha den.",
   },
   {
-    icon: Building2,
-    title: "Takarbeten",
-    description: "Takrenovering, takomläggning och takläggning av alla typer.",
+    icon: ShieldCheck,
+    title: "Försäkringsarbeten & ROT-avdrag",
+    description: "Som privatperson får du göra avdrag på 30% av arbetskostnaden upp till 50 000 kr per person och år. Läs mer på Skatteverkets hemsida eller kontakta oss med frågor.",
   },
 ];
 

@@ -1,31 +1,19 @@
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Phone, Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const contactInfo = [
+const locations = [
   {
-    icon: Phone,
-    title: "Telefon",
-    value: "08-XXX XX XX",
-    link: "tel:+46XXXXXXXX",
+    city: "Filipstad",
+    address: "Albanogatan 2",
+    postalCode: "682 30 Filipstad",
+    phone: "070-444 47 42",
   },
   {
-    icon: Mail,
-    title: "E-post",
-    value: "info@esbyggservice.com",
-    link: "mailto:info@esbyggservice.com",
-  },
-  {
-    icon: MapPin,
-    title: "Adress",
-    value: "Stockholm, Sverige",
-    link: "#",
-  },
-  {
-    icon: Clock,
-    title: "Öppettider",
-    value: "Mån-Fre: 07:00-16:00",
-    link: "#",
+    city: "Örebro",
+    address: "Skomaskinsgatan 6",
+    postalCode: "702 27 Örebro",
+    phone: "070-440 41 54",
   },
 ];
 
@@ -53,25 +41,69 @@ const Contact = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {contactInfo.map((info, index) => (
-            <motion.a
-              key={info.title}
-              href={info.link}
+        {/* Location Cards */}
+        <div className="grid md:grid-cols-2 gap-8 mb-12 max-w-4xl mx-auto">
+          {locations.map((location, index) => (
+            <motion.div
+              key={location.city}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group bg-card border border-border rounded-xl p-6 text-center hover:border-primary/50 transition-all duration-300 hover:shadow-gold"
+              className="bg-card border border-border rounded-xl p-8 hover:border-primary/50 transition-all duration-300 hover:shadow-gold"
             >
-              <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
-                <info.icon className="w-6 h-6 text-primary" />
+              <h3 className="text-xl font-semibold mb-6 text-gradient-gold">{location.city}</h3>
+              
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-medium">Adress</p>
+                    <p className="text-muted-foreground text-sm">{location.address}</p>
+                    <p className="text-muted-foreground text-sm">{location.postalCode}</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-medium">Telefon</p>
+                    <a 
+                      href={`tel:${location.phone.replace(/-/g, "")}`}
+                      className="text-muted-foreground text-sm hover:text-primary transition-colors"
+                    >
+                      {location.phone}
+                    </a>
+                  </div>
+                </div>
               </div>
-              <h3 className="font-semibold mb-1">{info.title}</h3>
-              <p className="text-muted-foreground text-sm">{info.value}</p>
-            </motion.a>
+            </motion.div>
           ))}
         </div>
+
+        {/* Email Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="bg-card border border-border rounded-xl p-6 max-w-md mx-auto mb-12 text-center hover:border-primary/50 transition-all duration-300"
+        >
+          <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-4">
+            <Mail className="w-6 h-6 text-primary" />
+          </div>
+          <p className="font-medium mb-1">E-post</p>
+          <a 
+            href="mailto:info@esbyggservice.com"
+            className="text-muted-foreground hover:text-primary transition-colors"
+          >
+            info@esbyggservice.com
+          </a>
+        </motion.div>
 
         {/* CTA Box */}
         <motion.div
@@ -98,9 +130,9 @@ const Contact = () => {
               Ring oss nu
             </Button>
             <Button
-              variant="outline"
+              variant="default"
               size="xl"
-              className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10"
+              className="bg-background text-primary hover:bg-background/90"
             >
               <Mail className="w-5 h-5" />
               Skicka e-post
