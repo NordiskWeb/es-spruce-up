@@ -1,10 +1,19 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, Phone, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { supabase } from "@/integrations/supabase/client";
 import logo from "@/assets/logo.png";
 
-const navItems = [
+interface MenuItem {
+  id: string;
+  label: string;
+  href: string;
+  sort_order: number;
+  is_visible: boolean;
+}
+
+const defaultNavItems = [
   { label: "Hem", href: "#hem" },
   { label: "Tjänster", href: "#tjanster" },
   { label: "Referenser", href: "#referenser" },
@@ -15,6 +24,7 @@ const navItems = [
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [navItems, setNavItems] = useState(defaultNavItems);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,6 +32,25 @@ const Header = () => {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const fetchMenuItems = async () => {
+      const { data, error } = await supabase
+        .from('menu_items')
+        .select('*')
+        .eq('is_visible', true)
+        .order('sort_order');
+      
+      if (!error && data && data.length > 0) {
+        setNavItems(data.map(item => ({
+          label: item.label,
+          href: item.href,
+        })));
+      }
+    };
+
+    fetchMenuItems();
   }, []);
 
   return (
@@ -64,6 +93,13 @@ const Header = () => {
             <Button variant="gold" size="lg">
               Kostnadsfri offert
             </Button>
+            <a 
+              href="/auth" 
+              className="text-muted-foreground hover:text-primary transition-colors p-2"
+              title="Admin"
+            >
+              <Settings className="w-5 h-5" />
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -96,6 +132,14 @@ const Header = () => {
                   {item.label}
                 </a>
               ))}
+              <a 
+                href="/auth" 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-muted-foreground hover:text-primary transition-colors py-2 text-lg flex items-center gap-2"
+              >
+                <Settings className="w-5 h-5" />
+                Admin
+              </a>
               <Button variant="gold" size="lg" className="mt-4">
                 Kostnadsfri offert
               </Button>
