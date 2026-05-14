@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroBg from "@/assets/hero-bg.jpg";
+import heroBg from "@/assets/hero-bg.webp";
 
 const Hero = () => {
   return (
@@ -25,7 +25,7 @@ const Hero = () => {
             transition={{ duration: 0.8 }}
           >
             <span className="inline-block text-primary text-sm font-semibold tracking-widest uppercase mb-6">
-              Professionellt byggföretag
+              Byggservice i Filipstad & Örebro
             </span>
           </motion.div>
 
@@ -71,12 +71,14 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Button variant="hero" size="xl">
-              Begär offert
-              <ArrowRight className="w-5 h-5" />
+            <Button variant="hero" size="xl" asChild>
+              <a href="mailto:info@esbyggservice.com">
+                Begär offert
+                <ArrowRight className="w-5 h-5" />
+              </a>
             </Button>
-            <Button variant="goldOutline" size="xl">
-              Mer om oss
+            <Button variant="goldOutline" size="xl" asChild>
+              <a href="#om-oss">Mer om oss</a>
             </Button>
           </motion.div>
         </div>

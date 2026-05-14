@@ -38,11 +38,11 @@ const Footer = () => {
             <ul className="space-y-4">
               <li>
                 <a
-                  href="tel:+46XXXXXXXX"
+                  href="tel:0704444742"
                   className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
                 >
                   <Phone className="w-4 h-4" />
-                  08-XXX XX XX
+                  070-444 47 42
                 </a>
               </li>
               <li>
@@ -55,10 +55,13 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <span className="flex items-center gap-3 text-muted-foreground">
-                  <MapPin className="w-4 h-4" />
-                  Stockholm, Sverige
-                </span>
+                <a
+                  href="mailto:info@esbyggservice.com"
+                  className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
+                >
+                  <Mail className="w-4 h-4" />
+                  info@esbyggservice.com
+                </a>
               </li>
             </ul>
           </div>
