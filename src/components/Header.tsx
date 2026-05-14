@@ -140,8 +140,8 @@ const Header = () => {
                 <Settings className="w-5 h-5" />
                 Admin
               </a>
-              <Button variant="gold" size="lg" className="mt-4">
-                Kostnadsfri offert
+              <Button variant="gold" size="lg" className="mt-4" asChild>
+                <a href="mailto:info@esbyggservice.com">Kostnadsfri offert</a>
               </Button>
             </nav>
           </motion.div>
