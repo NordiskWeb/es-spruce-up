@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroBg from "@/assets/hero-bg.jpg";
+import heroBg from "@/assets/hero-bg.webp";
 
 const Hero = () => {
   return (
@@ -25,7 +25,7 @@ const Hero = () => {
             transition={{ duration: 0.8 }}
           >
             <span className="inline-block text-primary text-sm font-semibold tracking-widest uppercase mb-6">
-              Professionellt byggföretag
+              Byggservice i Filipstad & Örebro
             </span>
           </motion.div>
 
