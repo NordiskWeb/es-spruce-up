@@ -54,15 +54,6 @@ const Footer = () => {
                   info@esbyggservice.com
                 </a>
               </li>
-              <li>
-                <a
-                  href="mailto:info@esbyggservice.com"
-                  className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
-                >
-                  <Mail className="w-4 h-4" />
-                  info@esbyggservice.com
-                </a>
-              </li>
             </ul>
           </div>
         </div>
