@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Users, Award, Clock, ThumbsUp } from "lucide-react";
 
 const stats = [
-  { icon: Users, value: "50+", label: "Anställda" },
+  { icon: Users, value: "39+", label: "Anställda" },
   { icon: Award, value: "15+", label: "År i branschen" },
   { icon: Clock, value: "500+", label: "Avslutade projekt" },
   { icon: ThumbsUp, value: "100%", label: "Nöjda kunder" },

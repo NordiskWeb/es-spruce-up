@@ -1,28 +1,23 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import bathroomImg from "@/assets/bathroom.jpg";
-import roofingImg from "@/assets/roofing.jpg";
-import kitchenImg from "@/assets/kitchen.jpg";
+import refFonster from "@/assets/ref-fonster.jpg";
+import refRenovering from "@/assets/ref-renovering.jpg";
+import refBadrum from "@/assets/ref-badrum.jpg";
 
 const projects = [
   {
-    image: bathroomImg,
-    title: "Badrumsrenovering",
-    location: "Stockholm",
+    image: refFonster,
+    title: "Fönster",
+    category: "Fönsterarbete",
+  },
+  {
+    image: refRenovering,
+    title: "Renovering",
     category: "Renovering",
   },
   {
-    image: roofingImg,
-    title: "Takomläggning",
-    location: "Uppsala",
-    category: "Takarbete",
-  },
-  {
-    image: kitchenImg,
-    title: "Köksrenovering",
-    location: "Malmö",
-    category: "Renovering",
+    image: refBadrum,
+    title: "Badrum",
+    category: "Badrumsrenovering",
   },
 ];
 

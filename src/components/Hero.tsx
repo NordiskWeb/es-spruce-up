@@ -71,12 +71,14 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Button variant="hero" size="xl">
-              Begär offert
-              <ArrowRight className="w-5 h-5" />
+            <Button variant="hero" size="xl" asChild>
+              <a href="mailto:info@esbyggservice.com">
+                Begär offert
+                <ArrowRight className="w-5 h-5" />
+              </a>
             </Button>
-            <Button variant="goldOutline" size="xl">
-              Mer om oss
+            <Button variant="goldOutline" size="xl" asChild>
+              <a href="#om-oss">Mer om oss</a>
             </Button>
           </motion.div>
         </div>

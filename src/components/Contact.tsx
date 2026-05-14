@@ -125,17 +125,23 @@ const Contact = () => {
               variant="default"
               size="xl"
               className="bg-background text-primary hover:bg-background/90"
+              asChild
             >
-              <Phone className="w-5 h-5" />
-              Ring oss nu
+              <a href="tel:0704444742">
+                <Phone className="w-5 h-5" />
+                Ring oss nu
+              </a>
             </Button>
             <Button
               variant="default"
               size="xl"
               className="bg-background text-primary hover:bg-background/90"
+              asChild
             >
-              <Mail className="w-5 h-5" />
-              Skicka e-post
+              <a href="mailto:info@esbyggservice.com">
+                <Mail className="w-5 h-5" />
+                Skicka e-post
+              </a>
             </Button>
           </div>
         </motion.div>

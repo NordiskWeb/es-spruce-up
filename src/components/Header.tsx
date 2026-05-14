@@ -86,12 +86,12 @@ const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden lg:flex items-center gap-4">
-            <a href="tel:+46XXXXXXXXX" className="flex items-center gap-2 text-primary">
+            <a href="tel:0704444742" className="flex items-center gap-2 text-primary">
               <Phone className="w-4 h-4" />
-              <span className="text-sm font-medium">Ring oss</span>
+              <span className="text-sm font-medium">070-444 47 42</span>
             </a>
-            <Button variant="gold" size="lg">
-              Kostnadsfri offert
+            <Button variant="gold" size="lg" asChild>
+              <a href="mailto:info@esbyggservice.com">Kostnadsfri offert</a>
             </Button>
             <a 
               href="/auth" 
