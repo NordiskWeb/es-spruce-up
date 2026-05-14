@@ -55,7 +55,7 @@ const References = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group cursor-pointer"
+              className="group"
             >
               <div className="relative overflow-hidden rounded-xl aspect-[4/3] mb-4">
                 <img
@@ -63,33 +63,14 @@ const References = () => {
                   alt={project.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-background/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <span className="text-primary font-medium flex items-center gap-2">
-                    Se projekt <ArrowRight className="w-4 h-4" />
-                  </span>
-                </div>
               </div>
               <span className="text-primary text-sm font-medium uppercase tracking-wide">
                 {project.category}
               </span>
               <h3 className="text-xl font-semibold mt-1">{project.title}</h3>
-              <p className="text-muted-foreground text-sm">{project.location}</p>
             </motion.div>
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-center mt-12"
-        >
-          <Button variant="goldOutline" size="lg">
-            Se alla projekt
-            <ArrowRight className="w-4 h-4" />
-          </Button>
-        </motion.div>
       </div>
     </section>
   );
