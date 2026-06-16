@@ -1,4 +1,5 @@
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
 
 const Footer = () => {
@@ -19,14 +20,20 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-6">Snabblänkar</h4>
             <ul className="space-y-3">
-              {["Hem", "Tjänster", "Referenser", "Om Oss", "Kontakt"].map((link) => (
-                <li key={link}>
-                  <a
-                    href={`#${link.toLowerCase().replace(" ", "-")}`}
+              {[
+                { label: "Hem", href: "/" },
+                { label: "Tjänster", href: "/tjanster" },
+                { label: "Referenser", href: "/referenser" },
+                { label: "Om Oss", href: "/om-oss" },
+                { label: "Kontakt", href: "/kontakt" },
+              ].map((link) => (
+                <li key={link.href}>
+                  <Link
+                    to={link.href}
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
-                    {link}
-                  </a>
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
