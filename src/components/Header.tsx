@@ -1,25 +1,29 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import logo from "@/assets/logo.png";
 
-interface MenuItem {
-  id: string;
-  label: string;
-  href: string;
-  sort_order: number;
-  is_visible: boolean;
-}
-
 const defaultNavItems = [
-  { label: "Hem", href: "#hem" },
-  { label: "Tjänster", href: "#tjanster" },
-  { label: "Referenser", href: "#referenser" },
-  { label: "Om Oss", href: "#om-oss" },
-  { label: "Kontakt", href: "#kontakt" },
+  { label: "Hem", href: "/" },
+  { label: "Tjänster", href: "/tjanster" },
+  { label: "Referenser", href: "/referenser" },
+  { label: "Om Oss", href: "/om-oss" },
+  { label: "Kontakt", href: "/kontakt" },
 ];
+
+// Map any legacy hash hrefs from the CMS to subpage routes
+const hashToRoute: Record<string, string> = {
+  "#hem": "/",
+  "#tjanster": "/tjanster",
+  "#referenser": "/referenser",
+  "#om-oss": "/om-oss",
+  "#kontakt": "/kontakt",
+};
+
+const normalizeHref = (href: string) => hashToRoute[href] ?? href;
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -27,9 +31,7 @@ const Header = () => {
   const [navItems, setNavItems] = useState(defaultNavItems);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -37,21 +39,37 @@ const Header = () => {
   useEffect(() => {
     const fetchMenuItems = async () => {
       const { data, error } = await supabase
-        .from('menu_items')
-        .select('*')
-        .eq('is_visible', true)
-        .order('sort_order');
-      
+        .from("menu_items")
+        .select("*")
+        .eq("is_visible", true)
+        .order("sort_order");
+
       if (!error && data && data.length > 0) {
-        setNavItems(data.map(item => ({
-          label: item.label,
-          href: item.href,
-        })));
+        setNavItems(
+          data.map((item) => ({
+            label: item.label,
+            href: normalizeHref(item.href),
+          }))
+        );
       }
     };
-
     fetchMenuItems();
   }, []);
+
+  const renderLink = (item: { label: string; href: string }, className: string, onClick?: () => void) => {
+    if (item.href.startsWith("/")) {
+      return (
+        <Link key={item.href} to={item.href} className={className} onClick={onClick}>
+          {item.label}
+        </Link>
+      );
+    }
+    return (
+      <a key={item.href} href={item.href} className={className} onClick={onClick}>
+        {item.label}
+      </a>
+    );
+  };
 
   return (
     <motion.header
@@ -59,32 +77,24 @@ const Header = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-background/95 backdrop-blur-md shadow-lg"
-          : "bg-transparent"
+        isScrolled ? "bg-background/95 backdrop-blur-md shadow-lg" : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <a href="#hem" className="flex items-center">
+          <Link to="/" className="flex items-center">
             <img src={logo} alt="ES Byggservice AB" className="h-10 md:h-12 w-auto" />
-          </a>
+          </Link>
 
-          {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="text-foreground/80 hover:text-primary transition-colors duration-300 text-sm font-medium tracking-wide"
-              >
-                {item.label}
-              </a>
-            ))}
+            {navItems.map((item) =>
+              renderLink(
+                item,
+                "text-foreground/80 hover:text-primary transition-colors duration-300 text-sm font-medium tracking-wide"
+              )
+            )}
           </nav>
 
-          {/* CTA Button */}
           <div className="hidden lg:flex items-center gap-4">
             <a href="tel:0704444742" className="flex items-center gap-2 text-primary">
               <Phone className="w-4 h-4" />
@@ -93,16 +103,11 @@ const Header = () => {
             <Button variant="gold" size="lg" asChild>
               <a href="mailto:info@esbyggservice.com">Kostnadsfri offert</a>
             </Button>
-            <a 
-              href="/auth" 
-              className="text-muted-foreground hover:text-primary transition-colors p-2"
-              title="Admin"
-            >
+            <a href="/auth" className="text-muted-foreground hover:text-primary transition-colors p-2" title="Admin">
               <Settings className="w-5 h-5" />
             </a>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             className="lg:hidden text-foreground p-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -112,7 +117,6 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -122,18 +126,15 @@ const Header = () => {
             className="lg:hidden bg-background/95 backdrop-blur-md border-t border-border"
           >
             <nav className="container mx-auto px-4 py-6 flex flex-col gap-4">
-              {navItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-foreground/80 hover:text-primary transition-colors py-2 text-lg"
-                >
-                  {item.label}
-                </a>
-              ))}
-              <a 
-                href="/auth" 
+              {navItems.map((item) =>
+                renderLink(
+                  item,
+                  "text-foreground/80 hover:text-primary transition-colors py-2 text-lg",
+                  () => setIsMobileMenuOpen(false)
+                )
+              )}
+              <a
+                href="/auth"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="text-muted-foreground hover:text-primary transition-colors py-2 text-lg flex items-center gap-2"
               >
